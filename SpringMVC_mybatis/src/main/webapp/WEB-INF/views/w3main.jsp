@@ -26,17 +26,6 @@
 			    margin-inline-start: 0px;
 			    margin-inline-end: 0px;
 			}
-			/* .all-class {
-				display: block;
-				width: 70%;
-				float: center;
-			}
-			all-lecture {
-				diplay: block;
-				width: 70%;
-				float: center;
-			} */
-			
 			.w3-bar .w3-button {
 			    white-space: normal;
 			}
@@ -863,19 +852,7 @@
 	<body>  
 		<h1 style="text-align: center;">W3Class</h1>  
 		
-<%-- 		<%  
-		
- 		List<Classroom> all_classroom_list = ClassDao.getAllClassroom();  
- 		List<Lecture> all_lecture_list = ClassDao.getAllLectures();
- 		List<Lecture> lecture_in_class = ClassDao.getLecturesByClassroom(1);
-		
- 		request.setAttribute("a_clr_list",all_classroom_list);  
- 		request.setAttribute("a_lec_list",all_lecture_list);  
- 	  	request.setAttribute("lec_in_class",lecture_in_class); 
- 	
-		
-		%>  
-		 --%>
+
 	
 	<!-- 	classroom & lecture Menu -->	
 	 	
@@ -885,66 +862,38 @@
             	href="viewclassroom" onclick="AllClassroom()" id="navbtn_tutorials" title="Tutorials" style="width:116px; ">Classroom</a> 
             	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" 
             	href="viewlecture" onclick="AllLecture()" id="navbtn_references" title="References" style="width:132px; ">Lecture</a> 
-<!--             	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" href="javascript:void(0)" onclick="LectureInClass()" id="navbtn_references" title="References" style="width:132px; ">Lecture</a> 
- -->
+
             	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" 
             	href="lectureform" id="navbtn_references" title="References" style="width:150px; float:right;">Create Lecture</a> 				
 				<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" 
 				href="classroomform" id="navbtn_tutorials" title="Tutorials" style="width:150px;float:right;">Create Classroom</a> 
 
-	            <!-- <a class="w3-bar-item w3-button bar-item-hover w3-padding-24" href="javascript:void(0)" onclick="AllClassroom()" id="navbtn_menu" style="width:93px">Classroom</a>
-		        <a class="w3-bar-item w3-button bar-item-hover w3-padding-24" href="javascript:void(0)" onclick="AllLecture()" id="navbtn_menu" style="width:93px">Lecture</a> -->
-	
-	            <!-- <div class="w3-right w3-padding-16 w3-white">
-	                <a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" href="javascript:void(0)" onclick="w3_open_nav('tutorials')" id="navbtn_tutorials" title="Tutorials" style="width:116px; height: 70px;">Create Classroom</a> 
-            		<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" href="javascript:void(0)" onclick="w3_open_nav('references')" id="navbtn_references" title="References" style="width:132px; height: 70px;">Create Lecture</a> 
-	            </div> -->
+	            
 	        </div>
     	</nav>
-		<section>
-		1.View All Classrooms: Menu -> Classroom Click!!
-		<br>
-		1.View All Lecture: Menu -> Lecture Click!!
-		<br>
-			
-		</section>
-	
 
-	<!-- 	classroom Menu float right-->
-		<section>
-			<!-- LectureInClass() -->
+
+		<section class="center" style="text-align: center;">
+			<h1>Select your choice</h1>	
 		</section>
-		
+			<footer class="w3-container w3-center w3-padding-16 ws-black" style="position: fixed; bottom:0; left:0; padding: 12px">
+	        <div class="w3-container w3-padding-16">
+	            <nav class="w3-center w3-hide-large w3-margin-top w3-wide">
+	                <a href="https://www.w3schools.com/forum/default.asp" target="_blank" class="w3-hover-text-green" style="color: white!important;text-decoration:none" title="Forum">FORUM</a> |
+	                <a href="https://www.w3schools.com/about/default.asp" target="_top" class="w3-hover-text-green" style="color: white;text-decoration:none" title="About W3Schools">ABOUT</a>
+	            </nav>
+	        </div>
+	        <div class="w3-center w3-medium" >
+	        <p style="padding-top:16px;">
+	            W3Schools is optimized for learning, testing, and training. Examples might be simplified to improve reading and basic understanding. Tutorials, references, and examples are constantly reviewed to avoid errors, but we cannot warrant full correctness of
+	            all content. While using this site, you agree to have read and accepted our <a href="https://www.w3schools.com/about/about_copyright.asp" class="white_atag w3-hover-text-green">terms of use</a>, <a href="https://www.w3schools.com/about/about_privacy.asp"
+	                class="white_atag w3-hover-text-green">cookie and privacy policy</a>.<br>
+	            <a href="https://www.w3schools.com/about/about_copyright.asp" class="white_atag w3-hover-text-green">Copyright 1999-2022</a> by Refsnes Data. All Rights Reserved.<br><br>
+	        </p>	        
+	        </div>
+	</footer>
 		<script>
-			/* function AllClassroom() {
-			  	
-			  	 List<Classroom> all_classroom_list = ClassDao.getAllClassroom();  
-				request.setAttribute("a_clr_list",all_classroom_list);  
-				
-				document.getElementById("all-class").style.display = "block";
-			  	document.getElementById("all-lecture").style.display = "none";
-			  	//document.getElementById("class-lecture").style.display = "none";
-			}
-			function AllLecture() {
-			  	
-			  	 List<Lecture> all_lecture_list = ClassDao.getAllLectures();  
-				request.setAttribute("a_lec_list",all_lecture_list);   
-				
-				document.getElementById("all-class").style.display = "none";
-			  	document.getElementById("all-lecture").style.display = "block";
-			  	//document.getElementById("class-lecture").style.display = "none";
-			}
-			function LectureInClass() {
-			  	
-			  	 var cid = ClassDao.getClassroomId(ctitle); 
-			  	List<Lecture> lecture_in_class = ClassDao.getLecturesByClassroom(cid);
-			  	request.setAttribute("lecture_in_class",lecture_in_class);  
-			  	
-			  	document.getElementById("all-class").style.display = "none";
-			  	document.getElementById("all-lecture").style.display = "none";
-			  	//document.getElementById("class-lecture").style.display = "block";
-			  	
-			} */
+			
 		</script>
 	</body>
 </html>

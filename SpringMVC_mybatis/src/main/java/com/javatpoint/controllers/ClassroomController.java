@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;    
 import org.springframework.stereotype.Controller;  
 import org.springframework.ui.Model;  
@@ -14,82 +16,143 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;     
 
 import com.javatpoint.beans.*;    
-import com.javatpoint.dao.*;   
+import com.javatpoint.dao.*;
 
-@Controller    
+import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.sql.DataSource;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+//import com.mysql.jdbc.Connection;
+//import com.mysql.jdbc.Statement;
+
+@Controller
 public class ClassroomController {    
-    @Autowired    
-    ClassDao dao;//will inject dao from XML file    
+	
+//    @Autowired    
+//    ClassDao dao;//will inject dao from XML file  
+    
+    @Inject
+   	private SqlSessionFactory sqlFactory;
+    
+//    @Resource(name = "ClassroomDAO")
+    @Autowired  
+    private ClassroomDAO classroomdao;
+
+//    @Resource(name = "LectureDAO")
+    @Autowired  
+    private LectureDAO lecturedao;
+    
+//    @Resource(name = "UserDAO")
+    @Autowired  
+    private UserDAO userdao;
     
 	@RequestMapping(value = "/")
 	public String index() {
+		try {
+
+			SqlSession session = sqlFactory.openSession();
+			System.out.println("성공 : " + session);
+				
+		} catch (Exception ex){
+			System.out.println("실패..!");
+			ex.printStackTrace();
+		}
 		return "w3main";
 	}
     
     /*It displays a form to input data, here "command" is a reserved request attribute  
      *which is used to display object data into form  
      */
+
 	
+//	// mvc
+//   @RequestMapping(value = "/classroomsave", method = RequestMethod.POST)    
+//    public String showclassroomform(@ModelAttribute("m") ClassroomVO classroom ){    
+//		dao.saveClassroom(classroom);
+//        return "allclassroom";   
+//    }
+    
+
+	
+//    @RequestMapping(value = "/lecturesave", method = RequestMethod.POST)    
+//    public String showlectureform(@ModelAttribute("m") Lecture lecture){    
+//        dao.saveLecture(lecture);
+//        return "alllecture";   
+//    } 
+    
+	// batis
+	@RequestMapping(value = "/loginform")
+	public String toLoginPage(Model m) {
+		m.addAttribute("command", new UserVO());
+		return "loginpage";
+	}
+	// batis
+	@RequestMapping(value = "/loginCheck", method = RequestMethod.POST)
+	public String loginCheck(@ModelAttribute("user") UserVO user) throws Exception {
+		String path="";
+		int check = userdao.Login(user);
+		if(check == 1) {
+			path = "w3main";
+		}
+		else path = "loginpage";
+		return path;
+	}
+		
+	
+	// batis
 	@RequestMapping("/classroomform")    
     public String showclassroomform(Model m){
-		m.addAttribute("command", new Classroom());
+		m.addAttribute("command", new ClassroomVO());
         return "classroomform";   
     } 
 	
-	// mvc
-   @RequestMapping(value = "/classroomsave", method = RequestMethod.POST)    
-    public String showclassroomform(@ModelAttribute("m") Classroom classroom ){    
-		dao.saveClassroom(classroom);
-        return "allclassroom";   
-    }
+    // batis
+    @RequestMapping(value="/saveClassroom",method = RequestMethod.POST)    
+    public String saveClassroom(@ModelAttribute("classroom") ClassroomVO Classroom){    
+        classroomdao.insertClassroom(Classroom);    
+        return "redirect:viewclassroom";  
+    }    
     
-	@RequestMapping("/lectureform")    
+	// batis
+    @RequestMapping("/lectureform")    
     public String showlectureform(Model m){
-		m.addAttribute("command", new Lecture());
+		m.addAttribute("command", new LectureVO());
         return "lectureform";   
     } 
 	
-    @RequestMapping(value = "/lecturesave", method = RequestMethod.POST)    
-    public String showlectureform(@ModelAttribute("m") Lecture lecture){    
-        dao.saveLecture(lecture);
-        return "alllecture";   
-    } 
-    
-    /*It saves object into database. The @ModelAttribute puts request data  
-     *  into model object. You need to mention RequestMethod.POST method   
-     *  because default request is GET*/    
-    @RequestMapping(value="/saveClassroom",method = RequestMethod.POST)    
-    public String saveClassroom(@ModelAttribute("classroom") Classroom Classroom){    
-        dao.saveClassroom(Classroom);    
-        return "allclassroom";//will redirect to viewemp request mapping    
-    }    
-    
+    // batis
     @RequestMapping(value="/saveLecture",method = RequestMethod.POST)    
-    public String saveLecture(@ModelAttribute("lecture") Lecture Lecture){    
-        dao.saveLecture(Lecture);    
-        return "alllecture";//will redirect to viewemp request mapping    
+    public String saveLecture(@ModelAttribute("lecture") LectureVO Lecture){    
+        lecturedao.insertLecture(Lecture);    
+        return "redirect:viewlecture";   
     }    
     
-    /* It provides list of employees in model object */    
-    @RequestMapping("/viewclassroom")    
+    
+
+    
+    // batis
+    @RequestMapping(value = "/viewclassroom")    
     public String viewclassroom(Model m){    
-        List<Classroom> list=dao.getAllClassroom();    
+        List<ClassroomVO> list = classroomdao.selectAllClassroom();    
         m.addAttribute("a_clr_list",list);   
         return "allclassroom";    
-    }   
-    
-    @RequestMapping("/viewlecture")    
+    }  
+
+    // batis
+    @RequestMapping(value = "/viewlecture")    
     public String viewlecture(Model m){    
-        List<Lecture> list=dao.getAllLecture();    
-        List<Lecture> HTML_list = dao.getAllLectureByCategory("HTML");
-        List<Lecture> CSS_list = dao.getAllLectureByCategory("CSS");
-        List<Lecture> JS_list = dao.getAllLectureByCategory("JavaScript");
+        List<LectureVO> list=lecturedao.selectAllLecture();    
+        List<LectureVO> HTML_list = lecturedao.selectAllLectureCate("HTML");
+        List<LectureVO> CSS_list = lecturedao.selectAllLectureCate("CSS");
+        List<LectureVO> JS_list = lecturedao.selectAllLectureCate("JavaScript");
         m.addAttribute("ALL_list",list);  
         m.addAttribute("HTML_list",HTML_list);  
         m.addAttribute("CSS_list",CSS_list);  
         m.addAttribute("JS_list",JS_list);  
         return "alllecture";    
-    }   
+    }  
     
 //    @RequestMapping(value = "/viewlecture/{cate}", method=RequestMethod.GET)    
 //    public String viewlecture(@PathVariable String cate, Model m){   
@@ -106,36 +169,43 @@ public class ClassroomController {
     
 //    카테고리 별 Lecture 출력   
     
+//    @RequestMapping(value="/LecByCate/{cate}")    
+//    public String viewlectureByCate(@PathVariable String cate, Model m){    
+//        List<Lecture> list = dao.getAllLectureByCategory(cate);    
+//        m.addAttribute("a_lec_list",list);  
+//        return "alllecture";    
+//    }
+    
+    // batis
     @RequestMapping(value="/LecByCate/{cate}")    
     public String viewlectureByCate(@PathVariable String cate, Model m){    
-        List<Lecture> list = dao.getAllLectureByCategory(cate);    
+        List<LectureVO> list = lecturedao.selectAllLectureCate(cate);    
         m.addAttribute("a_lec_list",list);  
         return "alllecture";    
     }
  
 //	클라스 별 Lecture 출력
+    // batis
     @RequestMapping(value="/lecbyclassroom/{id}", method=RequestMethod.GET)    
     public String viewbyclass(@PathVariable int id, Model m){    
-    	 List<Lecture> list = dao.getLectureByClassroom(id);       
+    	 List<LectureVO> list = lecturedao.selectAllLectureClass(id);       
         m.addAttribute("lec_by_class",list);
         m.addAttribute("classID", id);
         return "viewlecbyclassroom";    
     }
     
-    
-    
-   
-
     /* It displays object data into form for the given id.   
      * The @PathVariable puts URL data into variable.*/    
+    
+    // batis
     @RequestMapping(value="/editclassroom/{id}")    
     public String editClassroom(@PathVariable int id, Model m){    
-        Classroom classroom = dao.getRecordById(id);    
-        List<Lecture> list = dao.getLectureByClassroom(id);
-        List<Lecture> ALL_list =dao.getAllLecture();    
-        List<Lecture> HTML_list = dao.getAllLectureByCategory("HTML");
-        List<Lecture> CSS_list = dao.getAllLectureByCategory("CSS");
-        List<Lecture> JS_list = dao.getAllLectureByCategory("JavaScript");
+        ClassroomVO classroom = classroomdao.selectClassroom(id);    
+        List<LectureVO> list = lecturedao.selectAllLectureClass(id);
+        List<LectureVO> ALL_list =lecturedao.selectAllLecture();    
+        List<LectureVO> HTML_list = lecturedao.selectAllLectureCate("HTML");
+        List<LectureVO> CSS_list = lecturedao.selectAllLectureCate("CSS");
+        List<LectureVO> JS_list = lecturedao.selectAllLectureCate("JavaScript");
         m.addAttribute("classID",id);  
         m.addAttribute("command", classroom);
         m.addAttribute("lec_by_class",list);
@@ -147,53 +217,60 @@ public class ClassroomController {
         
         return "classroomeditform";    
     }
-    
-    @RequestMapping(value="/editclassroom/deleteLecInCurri/{cid}/{lid}", method=RequestMethod.GET)    
-    public String deleteLecInClass(@PathVariable int cid,@PathVariable int lid, Model m){    
-    	dao.delLecInCurri(cid, lid);     
-        return "redirect:/editclassroom/"+cid;    
-    }
-    
-    @RequestMapping(value="/editclassroom/addLecInCurri/{cid}/{lid}", method=RequestMethod.GET)    
-    public String addLecInClass(@PathVariable int cid,@PathVariable int lid, Model m){    
-    	dao.addLecInCurri(cid, lid);     
-        return "redirect:/editclassroom/"+cid;    
-    }
+   
+
     
     /* It updates model object. */    
     @RequestMapping(value="/editclassroom/editsave",method = RequestMethod.POST)    
-    public String editsave(@ModelAttribute("classroom") Classroom classroom){    
-        dao.update(classroom);    
+    public String editsave(@ModelAttribute("classroom") ClassroomVO classroom){    
+        classroomdao.updateClassroom(classroom);    
         return "redirect:/viewclassroom";    
     }
     
     @RequestMapping(value="/editlecture/{id}")    
     public String editLecture(@PathVariable int id, Model m){    
-        Lecture lecture = dao.getLectureById(id);    
+        LectureVO lecture = lecturedao.selectLecture(id);    
         m.addAttribute("command", lecture);
         m.addAttribute("lid", id);
         return "lectureeditform";    
     }
+    
     @RequestMapping(value="/editlecture/lectureeditsave",method = RequestMethod.POST)    
-    public String editlecturesave(@ModelAttribute("lecture") Lecture lecture){    
-        dao.updateLecture(lecture);    
+    public String editlecturesave(@ModelAttribute("lecture") LectureVO lecture){    
+        lecturedao.updateLecture(lecture);    
         return "redirect:/viewlecture";    
     }
     
     
+
+    // batis
+    @RequestMapping(value="/editclassroom/addLecInCurri/{cid}/{lid}", method=RequestMethod.GET)    
+    public String addLecInClass(@PathVariable Integer cid,@PathVariable Integer lid, Model m){    
+    	lecturedao.insertLecInCurri(cid, lid);     
+        return "redirect:/editclassroom/"+cid;    
+    }
+
+    // batis
+    @RequestMapping(value="/editclassroom/deleteLecInCurri/{cid}/{lid}", method=RequestMethod.GET)    
+    public String deleteLecInClass(@PathVariable Integer cid,@PathVariable Integer lid, Model m){    
+    	lecturedao.deleteLecInCurri(cid, lid);     
+        return "redirect:/editclassroom/"+cid;    
+    }
     
-    /* It deletes record for the given id in URL and redirects to /viewemp */    
+    // batis
     @RequestMapping(value="/deleteclassroom/{id}",method = RequestMethod.GET)    
     public String deleteClassroom(@PathVariable int id){    
-        dao.deleteClassroom(id);
-        dao.deleteClassroom2(id);
+        classroomdao.deleteClassroom(id);
+        lecturedao.deleteCurriculum(id);
+        
         return "redirect:/viewclassroom";    
     }
-    /* It deletes record for the given id in URL and redirects to /viewemp */    
+    // batis
     @RequestMapping(value="/deleteLecture/{id}",method = RequestMethod.GET)    
     public String deleteLecture(@PathVariable int id){    
-        dao.deleteLecture(id);
-        dao.deleteLecture2(id);
+        lecturedao.deleteLecture(id);
+        lecturedao.deleteCurriculumLec(id);
+        
         return "redirect:/viewlecture";    
     }
     

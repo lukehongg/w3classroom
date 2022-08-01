@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="classroomDB">
+	<!-- READ -->
+		<!-- CLASSROOM  -->
+			<select id="selectClassroom" parameterType="int" resultType="ClassroomVO">
+				select * from CLASSROOM where classID=#{value}
+			</select>
+			<select id="selectAllClassroom" resultType="ClassroomVO">
+				select * from CLASSROOM;
+			</select>
+			
+		<!--  LECTURE -->
+			<select id="selectLecture" parameterType="int" resultType="LectureVO">
+				select * from LECTURE where lectureID=#{value}
+			</select>
+			
+			<select id="selectAllLecture" resultType="LectureVO">
+				select * from LECTURE;
+			</select>
+			
+			<select id="selectAllLectureCate" parameterType="String" resultType="LectureVO">
+				select * from LECTURE where category=#{value}
+			</select>
+			
+			<select id="selectAllLectureClass" parameterType="int" resultType="LectureVO">
+				<!-- select * from LECTURE where category=#{value} -->
+				select L.lectureID AS lectureID, category, title, content, link from LECTURE L INNER JOIN CURRICULUM C ON L.lectureID = C.lectureID WHERE C.classroomID = #{value} order by lectureINDEX;
+			</select>
+			
+		<!--  USER -->
+			<select id="Login" parameterType="UserVO" resultType="Int">
+		        SELECT COUNT(*)
+		          FROM USER
+		         WHERE id = #{id}
+		           AND password = #{password}
+		    </select>
+			
+	
+	<!-- Insert -->
+	
+		<!--  CLASSROOM -->
+			<insert id="insertClassroom" parameterType="ClassroomVO">
+				insert into CLASSROOM values(#{title}, #{content})
+			</insert>
+	
+	
+	
+		<!--  LECTURE -->
+			<insert id="insertLecture" parameterType="LectureVO">
+				insert into LECTURE values(#{category}, #{title}, #{content}, #{link})
+			</insert>
+			
+			<insert id="insertLecInCurri" parameterType="HashMap">
+				insert into CURRICULUM values(#{cid}, #{lid})
+			</insert>
+			
+		
+		
+		
+		<!--  USER -->
+	
+	
+	
+	
+	<!-- Update -->
+		<!--  CLASSROOM -->
+			<update id="updateClassroom" parameterType="ClassroomVO">
+				update CLASSROOM set classTITLE=#{title}, classCONTENT=#{content} where classID=#{id}
+			</update>
+	
+	
+	
+		<!--  LECTURE -->
+			<update id="updateLecture" parameterType="LectureVO">
+				update LECTURE set category=#{category}, title=#{title}, content=#{content}, link=#{link} where lectureID=#{id}
+			</update>
+		
+		
+		
+		<!--  USER -->
+
+
+
+
+	<!-- Delete -->
+		<!--  CLASSROOM -->
+			<delete id="deleteClassroom" parameterType="int">
+				delete from CLASSROOM where classID=#{value}
+			</delete>
+	
+	
+	
+		<!--  LECTURE -->
+			<delete id="deleteLecture" parameterType="int">
+				delete from LECTURE where lectureID=#{value}
+			</delete>
+			
+			<delete id="deleteCurriculumLec" parameterType="int">
+				delete from CURRICULUM where lectureID=#{value}
+			</delete>
+			
+			<delete id="deleteCurriculum" parameterType="int">
+				delete from CURRICULUM where classID=#{value}
+			</delete>
+			<insert id="deleteLecInCurri" parameterType="HashMap">
+				delete from CURRICULUM where classID = #{cid} AND lectureID = #{lid})
+			</insert>
+			
+			
+		
+		
+		
+		<!--  USER -->
+	
+	
+
+</mapper>
