@@ -1,37 +1,43 @@
 package com.javatpoint.beans;
 
 public class ClassroomVO {
-	private int id;
-	private String title;
-	private String content;
+	private int classID;
+	private String classTITLE;
+	private String classCONTENT;
 	
 	public ClassroomVO() {
 		
 	}
 	
-	public ClassroomVO(int id, String title, String content) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.content = content;
+	public int getClassID() {
+		return classID;
 	}
 
-	public int getId() {
-		return id;
+	public void setClassID(int classID) {
+		this.classID = classID;
 	}
-	public void setId(int id) {
-		this.id = id;
+
+	public String getClassTITLE() {
+		return classTITLE;
 	}
-	public String getTitle() {
-		return title;
+
+	public void setClassTITLE(String classTITLE) {
+		this.classTITLE = classTITLE;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+
+	public String getClassCONTENT() {
+		return classCONTENT;
 	}
-	public String getContent() {
-		return content;
+
+	public void setClassCONTENT(String classCONTENT) {
+		this.classCONTENT = classCONTENT;
 	}
-	public void setContent(String content) {
-		this.content = content;
+
+	public ClassroomVO(int classID, String classTITLE, String classCONTENT) {
+		super();
+		this.classID = classID;
+		this.classTITLE = classTITLE;
+		this.classCONTENT = classCONTENT;
 	}
+
 }

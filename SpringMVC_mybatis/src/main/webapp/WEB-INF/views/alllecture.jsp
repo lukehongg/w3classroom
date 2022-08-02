@@ -36,9 +36,11 @@
 					text-align: center;
 				}
 				
-		
+			a:link, a:visited {
+    			color: mediumblue;
+    		}	
 			
-			p {
+			p{
 			    display: block;
 			    margin-block-start: 1em;
 			    margin-block-end: 1em;
@@ -333,15 +335,15 @@
  -->		<nav class="navbar" style="height: 70px; padding:0; margin:0;">
 	        <div class="w3-bar w3-card-2 notranslate" style="width: 100%; height: inherit; padding-left:12px;padding-right:16px;overflow:visible; vertical-align: middle;">
             	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24" 
-            	href="viewclassroom" id="navbtn_tutorials" title="Tutorials" style="width:116px; ">Classroom</a> 
+            	href="viewclassroom" id="navbtn_tutorials" title="Tutorials" style="width:116px; color: black;">Classroom</a> 
             	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" 
             	href="viewlecture" id="navbtn_references" title="References" style="width:132px; background-color: #029959; color: white; ">Lecture</a> 
 <!--             	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" href="javascript:void(0)" onclick="LectureInClass()" id="navbtn_references" title="References" style="width:132px; ">Lecture</a> 
  -->
             	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" 
-            	href="lectureform" id="navbtn_references" title="References" style="width:150px; float:right;">Create Lecture</a> 				
+            	href="lectureform" id="navbtn_references" title="References" style="width:150px; float:right;color: black;">Create Lecture</a> 				
 				<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" 
-				href="classroomform" id="navbtn_tutorials" title="Tutorials" style="width:150px;float:right;">Create Classroom</a> 
+				href="classroomform" id="navbtn_tutorials" title="Tutorials" style="width:150px;float:right;color: black;">Create Classroom</a> 
 
 	        </div>
     	</nav>
@@ -359,9 +361,9 @@
 					<tr><th>No.</th><th>category</th><th>Title</th><th>Content</th><th>link</th><th>Edit</th><th>Delete</th></tr>  
 					<c:forEach items="${ALL_list}" var="u">  
 						<tr>
-							<td>${u.getId()}</td><td>${u.getCategory()}</td><td>${u.getTitle()}</td><td>${u.getContent()}</td><td><a href="${u.getLink()}">Visit</a></td>
-							<td><a href="editlecture/${u.getId()}">Edit</a></td>   
-							<td><a href="deleteLecutre/${u.getId()}">Delete</a></td>
+							<td>${u.getLectureID()}</td><td>${u.getCategory()}</td><td>${u.getTitle()}</td><td>${u.getContent()}</td><td><a href="${u.getLink()}">Visit</a></td>
+							<td><a href="editlecture/${u.getLectureID()}">Edit</a></td>   
+							<td><a href="deleteLecture/${u.getLectureID()}">Delete</a></td>
 						</tr>  
 					</c:forEach>  
 				</table>
@@ -371,9 +373,9 @@
 					<tr><th>No.</th><th>category</th><th>Title</th><th>Content</th><th>link</th><th>Edit</th><th>Delete</th></tr>  
 					<c:forEach items="${HTML_list}" var="u">  
 						<tr>
-							<td>${u.getId()}</td><td>${u.getCategory()}</td><td>${u.getTitle()}</td><td>${u.getContent()}</td><td><a href="${u.getLink()}">Visit</a></td>
-							<td><a href="editlecture/${u.getId()}">Edit</a></td>  
-							<td><a href="deleteLecutre/${u.getId()}">Delete</a></td>
+							<td>${u.getLectureID()}</td><td>${u.getCategory()}</td><td>${u.getTitle()}</td><td>${u.getContent()}</td><td><a href="${u.getLink()}">Visit</a></td>
+							<td><a href="editlecture/${u.getLectureID()}">Edit</a></td>  
+							<td><a href="deleteLecutre/${u.getLectureID()}">Delete</a></td>
 						</tr>  
 					</c:forEach>  
 				</table>
@@ -383,9 +385,9 @@
 					<tr><th>No.</th><th>category</th><th>Title</th><th>Content</th><th>link</th><th>Edit</th><th>Delete</th></tr>  
 					<c:forEach items="${CSS_list}" var="u">  
 						<tr>
-							<td>${u.getId()}</td><td>${u.getCategory()}</td><td>${u.getTitle()}</td><td>${u.getContent()}</td><td><a href="${u.getLink()}">Visit</a></td>
-							<td><a href="editlecture/${u.getId()}">Edit</a></td>   
-							<td><a href="deleteLecutre/${u.getId()}">Delete</a></td>
+							<td>${u.getLectureID()}</td><td>${u.getCategory()}</td><td>${u.getTitle()}</td><td>${u.getContent()}</td><td><a href="${u.getLink()}">Visit</a></td>
+							<td><a href="editlecture/${u.getLectureID()}">Edit</a></td>   
+							<td><a href="deleteLecutre/${u.getLectureID()}">Delete</a></td>
 						</tr>  
 					</c:forEach>  
 				</table>
@@ -395,9 +397,9 @@
 					<tr><th>No.</th><th>category</th><th>Title</th><th>Content</th><th>link</th><th>Edit</th><th>Delete</th></tr>  
 					<c:forEach items="${JS_list}" var="u">  
 						<tr>
-							<td>${u.getId()}</td><td>${u.getCategory()}</td><td>${u.getTitle()}</td><td>${u.getContent()}</td><td><a href="${u.getLink()}">Visit</a></td>
-							<td><a href="editlecture/${u.getId()}">Edit</a></td>  
-							<td><a href="deleteLecutre/${u.getId()}">Delete</a></td>
+							<td>${u.getLectureID()}</td><td>${u.getCategory()}</td><td>${u.getTitle()}</td><td>${u.getContent()}</td><td><a href="${u.getLink()}">Visit</a></td>
+							<td><a href="editlecture/${u.getLectureID()}">Edit</a></td>  
+							<td><a href="deleteLecutre/${u.getLectureID()}">Delete</a></td>
 						</tr>  
 					</c:forEach>  
 				</table>

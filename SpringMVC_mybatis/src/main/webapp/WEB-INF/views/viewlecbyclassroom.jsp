@@ -35,9 +35,11 @@
 					text-align: center;
 				}
 				
-		
+			a:link, a:visited {
+    			color: mediumblue;
+    		}	
 			
-			p {
+			p{
 			    display: block;
 			    margin-block-start: 1em;
 			    margin-block-end: 1em;
@@ -327,22 +329,22 @@
             	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24" 
             	href="viewclassroom" id="navbtn_tutorials" title="Tutorials" style="width:116px; background-color: #029959;color: white; ">Classroom</a> 
             	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" 
-            	href="viewlecture" id="navbtn_references" title="References" style="width:132px; ">Lecture</a> 
+            	href="viewlecture" id="navbtn_references" title="References" style="width:132px;color: black; ">Lecture</a> 
 
-            	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" href="lectureform" id="navbtn_references" title="References" style="width:150px; float:right;">Create Lecture</a> 				
-				<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" href="classroomform" id="navbtn_tutorials" title="Tutorials" style="width:150px;float:right;">Create Classroom</a> 
+            	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" href="lectureform" id="navbtn_references" title="References" style="width:150px; float:right;color: black;">Create Lecture</a> 				
+				<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" href="classroomform" id="navbtn_tutorials" title="Tutorials" style="width:150px;float:right;color: black;">Create Classroom</a> 
 
 	       
 	        </div>
     	</nav>
 
-		<section>
+		<%-- <section>
 			<h1> View Lectures in Classroom ${classID} </h1>
 		    <table border="2" width="70%" cellpadding="2" class="all-class-table">  
 							<tr><th>No.</th><th>Category</th><th>Title</th><th>Content</th><th>Link</th></tr>  
 							<c:forEach var="u" items="${lec_by_class}">  
 								<tr>
-									<td>${u.id}</td><td>${u.category}</td><td>${u.title}</td>
+									<td>${u.lectureID}</td><td>${u.category}</td><td>${u.title}</td>
 									<td>${u.content}</td><td><a href="${u.getLink()}">Visit</a></td>
 								</tr>  
 							</c:forEach>  
@@ -350,7 +352,25 @@
 		    <br/>
 		    <br/>
 		    <a href="/mvc/viewclassroom">Return</a>  
+		</section> --%>
+	<div class="center">
+		<h1> View Lectures in Classroom ${classID} </h1>
+		<a href="/mvc/viewclassroom" style="float: right; padding: 12px; color: red;">Return</a> 
+		
+		<section style="display: block; width: 100%; height: 1000px; margin:auto">
+			<div class="main-div" id="ALL">
+				<table border="1"class="all-lecture-table"id="tableCSS">  
+					<tr><th>No.</th><th>category</th><th>Title</th><th>Content</th><th>link</th></tr>  
+					<c:forEach items="${lec_by_class}" var="u">  
+						<tr>
+							<td>${u.lectureID}</td><td>${u.category}</td><td>${u.title}</td>
+							<td>${u.content}</td><td><a href="${u.getLink()}">Visit</a></td>
+						</tr>   
+					</c:forEach>  
+				</table>
+			</div>
 		</section>
+	</div>
 
 	    <footer class="w3-container w3-center w3-padding-16 ws-black" style="position: fixed; bottom:0; left:0; padding: 12px">
 	        <div class="w3-container w3-padding-16">

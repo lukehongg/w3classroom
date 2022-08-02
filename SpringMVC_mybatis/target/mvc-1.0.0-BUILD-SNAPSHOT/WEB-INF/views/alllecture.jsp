@@ -36,9 +36,11 @@
 					text-align: center;
 				}
 				
-		
+			a:link, a:visited {
+    			color: mediumblue;
+    		}	
 			
-			p {
+			p{
 			    display: block;
 			    margin-block-start: 1em;
 			    margin-block-end: 1em;
@@ -129,7 +131,7 @@
 			}
 			
 			.w3-medium {
-			    font-size: 15px !important;
+			    font-size: 13px !important;
 			}
 			
 			.w3-code,
@@ -165,10 +167,7 @@
 			    background-color: #fff!important;
 			}
 			
-			a.w3-hover-text-green:hover,
-			a.w3-hover-text-green:active {
-			    color: #04AA6D!important;
-			}
+			
 			
 			.ws-green {
 			    background-color: #04AA6D!important;
@@ -223,9 +222,15 @@
 			.green-border {
 			    border-left: 4px solid #04AA6D;
 			}
-			
-			
-		
+			.white_atag {
+			    color: white !important;
+			    text-decoration: underline!important;
+			}
+			a.w3-hover-text-green:hover,
+			a.w3-hover-text-green:active {
+			    color: #04AA6D!important;
+			}
+
 			#nav_tutorials,
 			#nav_references,
 			#nav_exercises {
@@ -235,17 +240,13 @@
 			    width: 100%;
 			    z-index: 10 !important;
 			}
-			
+	
 			#nav_tutorials,
 			#nav_references,
 			#nav_exercises {
 			    margin-top: 0;
 			}
-			
-			
-			
-			
-			
+	
 			#nav_tutorials,
 			#nav_references,
 			#nav_exercises,
@@ -313,8 +314,8 @@
 			a.hover_green:active {
 			    background-color: #029959!important;
 			    color: white!important;
-			}
-		
+			}		
+			
 		</style>
 		<script type="text/javascript">
 			function selectcate(){
@@ -334,15 +335,15 @@
  -->		<nav class="navbar" style="height: 70px; padding:0; margin:0;">
 	        <div class="w3-bar w3-card-2 notranslate" style="width: 100%; height: inherit; padding-left:12px;padding-right:16px;overflow:visible; vertical-align: middle;">
             	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24" 
-            	href="viewclassroom" id="navbtn_tutorials" title="Tutorials" style="width:116px; ">Classroom</a> 
+            	href="viewclassroom" id="navbtn_tutorials" title="Tutorials" style="width:116px; color: black;">Classroom</a> 
             	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" 
             	href="viewlecture" id="navbtn_references" title="References" style="width:132px; background-color: #029959; color: white; ">Lecture</a> 
 <!--             	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" href="javascript:void(0)" onclick="LectureInClass()" id="navbtn_references" title="References" style="width:132px; ">Lecture</a> 
  -->
             	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" 
-            	href="lectureform" id="navbtn_references" title="References" style="width:150px; float:right;">Create Lecture</a> 				
+            	href="lectureform" id="navbtn_references" title="References" style="width:150px; float:right;color: black;">Create Lecture</a> 				
 				<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" 
-				href="classroomform" id="navbtn_tutorials" title="Tutorials" style="width:150px;float:right;">Create Classroom</a> 
+				href="classroomform" id="navbtn_tutorials" title="Tutorials" style="width:150px;float:right;color: black;">Create Classroom</a> 
 
 	        </div>
     	</nav>
@@ -360,9 +361,9 @@
 					<tr><th>No.</th><th>category</th><th>Title</th><th>Content</th><th>link</th><th>Edit</th><th>Delete</th></tr>  
 					<c:forEach items="${ALL_list}" var="u">  
 						<tr>
-							<td>${u.getId()}</td><td>${u.getCategory()}</td><td>${u.getTitle()}</td><td>${u.getContent()}</td><td><a href="${u.getLink()}">${u.getLink()}</a></td>
-							<td><a href="editlecture/${u.getId()}">Edit</a></td>   
-							<td><a href="deleteLecutre/${u.getId()}">Delete</a></td>
+							<td>${u.getLectureID()}</td><td>${u.getCategory()}</td><td>${u.getTitle()}</td><td>${u.getContent()}</td><td><a href="${u.getLink()}">Visit</a></td>
+							<td><a href="editlecture/${u.getLectureID()}">Edit</a></td>   
+							<td><a href="deleteLecture/${u.getLectureID()}">Delete</a></td>
 						</tr>  
 					</c:forEach>  
 				</table>
@@ -372,9 +373,9 @@
 					<tr><th>No.</th><th>category</th><th>Title</th><th>Content</th><th>link</th><th>Edit</th><th>Delete</th></tr>  
 					<c:forEach items="${HTML_list}" var="u">  
 						<tr>
-							<td>${u.getId()}</td><td>${u.getCategory()}</td><td>${u.getTitle()}</td><td>${u.getContent()}</td><td><a href="${u.getLink()}">${u.getLink()}</a></td>
-							<td><a href="editlecture/${u.getId()}">Edit</a></td>  
-							<td><a href="deleteLecutre/${u.getId()}">Delete</a></td>
+							<td>${u.getLectureID()}</td><td>${u.getCategory()}</td><td>${u.getTitle()}</td><td>${u.getContent()}</td><td><a href="${u.getLink()}">Visit</a></td>
+							<td><a href="editlecture/${u.getLectureID()}">Edit</a></td>  
+							<td><a href="deleteLecutre/${u.getLectureID()}">Delete</a></td>
 						</tr>  
 					</c:forEach>  
 				</table>
@@ -384,9 +385,9 @@
 					<tr><th>No.</th><th>category</th><th>Title</th><th>Content</th><th>link</th><th>Edit</th><th>Delete</th></tr>  
 					<c:forEach items="${CSS_list}" var="u">  
 						<tr>
-							<td>${u.getId()}</td><td>${u.getCategory()}</td><td>${u.getTitle()}</td><td>${u.getContent()}</td><td><a href="${u.getLink()}">${u.getLink()}</a></td>
-							<td><a href="editlecture/${u.getId()}">Edit</a></td>   
-							<td><a href="deleteLecutre/${u.getId()}">Delete</a></td>
+							<td>${u.getLectureID()}</td><td>${u.getCategory()}</td><td>${u.getTitle()}</td><td>${u.getContent()}</td><td><a href="${u.getLink()}">Visit</a></td>
+							<td><a href="editlecture/${u.getLectureID()}">Edit</a></td>   
+							<td><a href="deleteLecutre/${u.getLectureID()}">Delete</a></td>
 						</tr>  
 					</c:forEach>  
 				</table>
@@ -396,16 +397,31 @@
 					<tr><th>No.</th><th>category</th><th>Title</th><th>Content</th><th>link</th><th>Edit</th><th>Delete</th></tr>  
 					<c:forEach items="${JS_list}" var="u">  
 						<tr>
-							<td>${u.getId()}</td><td>${u.getCategory()}</td><td>${u.getTitle()}</td><td>${u.getContent()}</td><td><a href="${u.getLink()}">${u.getLink()}</a></td>
-							<td><a href="editlecture/${u.getId()}">Edit</a></td>  
-							<td><a href="deleteLecutre/${u.getId()}">Delete</a></td>
+							<td>${u.getLectureID()}</td><td>${u.getCategory()}</td><td>${u.getTitle()}</td><td>${u.getContent()}</td><td><a href="${u.getLink()}">Visit</a></td>
+							<td><a href="editlecture/${u.getLectureID()}">Edit</a></td>  
+							<td><a href="deleteLecutre/${u.getLectureID()}">Delete</a></td>
 						</tr>  
 					</c:forEach>  
 				</table>
 			</div>
 		</section>
 	</div>
-
+    <footer class="w3-container w3-center w3-padding-16 ws-black" style="position: fixed; bottom:0; left:0; padding: 12px">
+	        <div class="w3-container w3-padding-16">
+	            <nav class="w3-center w3-hide-large w3-margin-top w3-wide">
+	                <a href="https://www.w3schools.com/forum/default.asp" target="_blank" class="w3-hover-text-green" style="color: white;text-decoration:none" title="Forum">FORUM</a> |
+	                <a href="https://www.w3schools.com/about/default.asp" target="_top" class="w3-hover-text-green" style="color: white;text-decoration:none" title="About W3Schools">ABOUT</a>
+	            </nav>
+	        </div>
+	        <div class="w3-center w3-medium" style="">
+	        <p style="padding-top:16px;">
+	            W3Schools is optimized for learning, testing, and training. Examples might be simplified to improve reading and basic understanding. Tutorials, references, and examples are constantly reviewed to avoid errors, but we cannot warrant full correctness of
+	            all content. While using this site, you agree to have read and accepted our <a href="https://www.w3schools.com/about/about_copyright.asp" class="white_atag w3-hover-text-green">terms of use</a>, <a href="https://www.w3schools.com/about/about_privacy.asp"
+	                class="white_atag w3-hover-text-green">cookie and privacy policy</a>.<br>
+	            <a href="https://www.w3schools.com/about/about_copyright.asp" class="white_atag w3-hover-text-green">Copyright 1999-2022</a> by Refsnes Data. All Rights Reserved.<br><br>
+	        </p>	        
+	        </div>
+	</footer>
 	</body>
 </html>
 

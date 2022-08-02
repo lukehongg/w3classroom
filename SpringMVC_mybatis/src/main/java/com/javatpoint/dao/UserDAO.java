@@ -35,9 +35,9 @@ public class UserDAO {
 			List<ClassroomVO> classroomList = session.selectList("classroomDB.selectAllClassroom");
 			return classroomList;		
 		}
-		public int Login(UserVO user) throws Exception {
-	        return session.selectOne("classroomDB.Login", user);
-	    }
+//		public int Login(UserVO user) throws Exception {
+//	        return session.selectOne("classroomDB.Login", user);
+//	    }
 		
 		
 	

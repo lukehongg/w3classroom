@@ -313,6 +313,68 @@
 			    color: white!important;
 			}		
 			
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+  margin-right: 5px;
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+			a:link, a:visited {
+    			color: mediumblue;
+    		}	
 		</style>
 			<script type="text/javascript">
 				function selectcate(){
@@ -338,25 +400,25 @@
             	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24" 
             	href="viewclassroom" id="navbtn_tutorials" title="Tutorials" style="width:116px; background-color: #029959;color: white; ">Classroom</a> 
             	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" 
-            	href="viewlecture" id="navbtn_references" title="References" style="width:132px; ">Lecture</a> 
+            	href="viewlecture" id="navbtn_references" title="References" style="width:132px; color: black; ">Lecture</a> 
 
-            	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" href="lectureform" id="navbtn_references" title="References" style="width:150px; float:right;">Create Lecture</a> 				
-				<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" href="classroomform" id="navbtn_tutorials" title="Tutorials" style="width:150px;float:right;">Create Classroom</a> 
+            	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" href="lectureform" id="navbtn_references" title="References" style="width:150px; float:right;color: black;">Create Lecture</a> 				
+				<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" href="classroomform" id="navbtn_tutorials" title="Tutorials" style="width:170px;float:right;color: black;">Create Classroom</a> 
 
 	       
 	        </div>
     	</nav>
 
-		<section>
-       <div class="container">
+       <div class="container" style="margin-top: 10px;" >
        		<h1>Edit Classroom ${classID} </h1>
 	       <form:form method="post" action="editsave">  
+	        <form:hidden  path="classID" />
 			<div class="row">
 			    <div class="col-25">
 			      <label for="fname">Title :</label>
 			    </div>
 			    <div class="col-75">
-				  <form:input type="text" path="title"  />
+				  <form:input type="text" path="classTITLE"  />
 				</div>
 			</div>
 			<div class="row">
@@ -364,7 +426,7 @@
 			      <label for="fname">Content :</label>
 			    </div>
 			    <div class="col-75">
-				  <form:input type="text" path="content"  />
+				  <form:input type="text" path="classCONTENT"  />
 				</div>
 			</div>
 			<br>
@@ -374,23 +436,23 @@
 			 </div>
 	      	</form:form>
 	      </div>
+
        
-       
-       <section style="float: left;">
+       <section style="width: 48%; height: 1000px;float: left;">
        		<h2>Current CURRICULUM</h2>
 			<table border="1" id="tableCSS">  
 				<tr><th>No.</th><th>Category</th><th>Title</th><th>Content</th><th>Link</th><th>Delete</th></tr>  
 					<c:forEach var="u" items="${lec_by_class}">  
 						<tr>
-							<td>${u.id}</td><td>${u.category}</td><td>${u.title}</td>
-							<td>${u.content}</td><td>${u.link}</td>
-							<td><a href="deleteLecInCurri/${classID}/${u.id}">Delete</a></td>
+							<td>${u.lectureID}</td><td>${u.category}</td><td>${u.title}</td>
+							<td>${u.content}</td><td><a href="${u.getLink()}">Visit</a></td>
+							<td><a href="deleteLecInCurri/${classID}/${u.lectureID}">Delete</a></td>
 						</tr>  
 					</c:forEach>  
 			</table>
 		</section>
 		
-		<section style="float: right;">
+		<section style="width: 48%;height: 1000px;float: right;">
 			<h2>Lectures</h2>
 			<select name="cate" id="cate" onchange='selectcate();'>
 					<option value="ALL"> ALL </option>		
@@ -404,9 +466,9 @@
 				<tr><th>No.</th><th>Category</th><th>Title</th><th>Content</th><th>Link</th><th>Add</th></tr>  
 					<c:forEach var="u" items="${ALL_list}">  
 						<tr>
-							<td>${u.id}</td><td>${u.category}</td><td>${u.title}</td>
-							<td>${u.content}</td><td>${u.link}</td>
-							<td><a href="addLecInCurri/${classID}/${u.id}">Add</a></td>
+							<td>${u.lectureID}</td><td>${u.category}</td><td>${u.title}</td>
+							<td>${u.content}</td><td><a href="${u.getLink()}">Visit</a></td>
+							<td><a href="addLecInCurri/${classID}/${u.lectureID}">Add</a></td>
 						</tr>  
 					</c:forEach>  
 				</table>
@@ -417,9 +479,9 @@
 					<tr><th>No.</th><th>Category</th><th>Title</th><th>Content</th><th>link</th><th>Add</th></tr>  
 					<c:forEach items="${HTML_list}" var="u">  
 						<tr>
-							<td>${u.id}</td><td>${u.category}</td><td>${u.title}</td>
-							<td>${u.content}</td><td>${u.link}</td>
-							<td><a href="addLecInCurri/${classID}/${u.id}">Add</a></td>
+							<td>${u.lectureID}</td><td>${u.category}</td><td>${u.title}</td>
+							<td>${u.content}</td><td><a href="${u.getLink()}">Visit</a></td>
+							<td><a href="addLecInCurri/${classID}/${u.lectureID}">Add</a></td>
 						</tr>  
 					</c:forEach>  
 				</table>
@@ -429,9 +491,9 @@
 					<tr><th>No.</th><th>Category</th><th>Title</th><th>Content</th><th>link</th><th>Add</th></tr>  
 					<c:forEach items="${CSS_list}" var="u">  
 						<tr>
-							<td>${u.id}</td><td>${u.category}</td><td>${u.title}</td>
-							<td>${u.content}</td><td>${u.link}</td>
-							<td><a href="addLecInCurri/${classID}/${u.id}">Add</a></td>
+							<td>${u.lectureID}</td><td>${u.category}</td><td>${u.title}</td>
+							<td>${u.content}</td><td><a href="${u.getLink()}">Visit</a></td>
+							<td><a href="addLecInCurri/${classID}/${u.lectureID}">Add</a></td>
 						</tr>  
 					</c:forEach>  
 				</table>
@@ -441,9 +503,9 @@
 					<tr><th>No.</th><th>Category</th><th>Title</th><th>Content</th><th>link</th><th>Add</th></tr>  
 					<c:forEach items="${JS_list}" var="u">  
 						<tr>
-							<td>${u.id}</td><td>${u.category}</td><td>${u.title}</td>
-							<td>${u.content}</td><td>${u.link}</td>
-							<td><a href="addLecInCurri/${classID}/${u.id}">Add</a></td>
+							<td>${u.lectureID}</td><td>${u.category}</td><td>${u.title}</td>
+							<td>${u.content}</td><td><a href="${u.getLink()}">Visit</a></td>
+							<td><a href="addLecInCurri/${classID}/${u.lectureID}">Add</a></td>
 						</tr>  
 					</c:forEach>  
 				</table>

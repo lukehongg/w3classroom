@@ -3,6 +3,10 @@
 "http://mybatis.org/dtd/mybatis-3-config.dtd"> 
 
 <configuration> 
-
+	<typeAliases>
+		<typeAlias alias="ClassroomVO" type="com.javatpoint.beans.ClassroomVO" />
+		<typeAlias alias="LectureVO" type="com.javatpoint.beans.LectureVO" />
+		<typeAlias alias="UserVO" type="com.javatpoint.beans.UserVO" />
+	</typeAliases>
 
 </configuration>

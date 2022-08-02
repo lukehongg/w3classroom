@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;    
 import org.springframework.jdbc.core.JdbcTemplate;    
 import org.springframework.jdbc.core.RowMapper;    
+import org.apache.ibatis.annotations.*;
+
 
 import javax.annotation.Resource;
 import org.springframework.stereotype.Repository;
@@ -46,7 +48,7 @@ public class ClassroomDAO {
 		
 	// UPDATE		
 		public void updateClassroom(ClassroomVO classroom) {
-			session.update("updateClassroom", classroom);
+			session.update("classroomDB.updateClassroom", classroom);
 		}
 		
 		

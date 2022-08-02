@@ -21,7 +21,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.javatpoint.controllers" />
+	<context:component-scan base-package="com.javatpoint" />
 	
 	<beans:bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">    
 	<beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>   
@@ -30,17 +30,24 @@
 	<beans:property name="password" value="boroomdal1!"/>  
 	</beans:bean>    
 	
-	<beans:bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">    
+ <!-- 	<beans:bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">    
 	<beans:property name="dataSource" ref="ds"/>   
-	</beans:bean>    
+	</beans:bean>   --> 
 	    
-	<beans:bean id="dao" class="com.javatpoint.dao.ClassDao">    
+<!--   	<beans:bean id="ClassroomDAO" class="com.javatpoint.dao.ClassroomDAO">    
+	<beans:property name="template" ref="jt"/>
+	</beans:bean>    -->
+<!-- 	<beans:bean id="dao" class="com.javatpoint.dao.LectureDAO">    
 	<beans:property name="template" ref="jt"/>
 	</beans:bean>  
+	<beans:bean id="dao" class="com.javatpoint.dao.UserDAO">    
+	<beans:property name="template" ref="jt"/>
+	</beans:bean>  --> 
 	
 	
 	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
-		<beans:property name="mapperLocations" value="classpath:Mapper/*-mapper.xml"/>   
+		<beans:property name="configLocation" value="classpath:/mybatisConfig.xml" />
+		<beans:property name="mapperLocations" value="classpath*:/Mapper/*-mapper.xml" />   
 		<beans:property name="dataSource" ref="dataSource"/>  
 	</beans:bean>    
 	

@@ -8,7 +8,7 @@
 	<!-- DB -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">    
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>   
-		<property name="url" value="jdbc:mysql://85.10.205.173/w3class?characterEncoding=utf8"/>   
+		<property name="url" value="jdbc:mysql://85.10.205.173/w3class?useSSL=false"/>   
 		<property name="username" value="w3class"/> 
 		<property name="password" value="boroomdal1!"/>  
 	</bean>    
@@ -23,4 +23,10 @@
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">    
 	 <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
 	</bean>  
+	
+	<!-- <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.javatpoint.service.*" />
+		<property name="annotationClass" value="hs.spring.hsweb.config.MapperInterface" />
+	</bean> -->
+	
 </beans>

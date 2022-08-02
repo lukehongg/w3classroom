@@ -312,7 +312,10 @@
 			a.hover_green:active {
 			    background-color: #029959!important;
 			    color: white!important;
-			}		
+			}	
+			a:link, a:visited {
+    			color: mediumblue;
+    		}		
 			
 		</style>
 
@@ -328,10 +331,10 @@
             	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24" 
             	href="viewclassroom" id="navbtn_tutorials" title="Tutorials" style="width:116px; background-color: #029959;color: white; ">Classroom</a> 
             	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" 
-            	href="viewlecture" id="navbtn_references" title="References" style="width:132px; ">Lecture</a> 
+            	href="viewlecture" id="navbtn_references" title="References" style="width:132px; color: black; ">Lecture</a> 
 
-            	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" href="lectureform" id="navbtn_references" title="References" style="width:150px; float:right;">Create Lecture</a> 				
-				<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" href="classroomform" id="navbtn_tutorials" title="Tutorials" style="width:150px;float:right;">Create Classroom</a> 
+            	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" href="lectureform" id="navbtn_references" title="References" style="width:150px; float:right;color: black;">Create Lecture</a> 				
+				<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" href="classroomform" id="navbtn_tutorials" title="Tutorials" style="width:150px;float:right;color: black;">Create Classroom</a> 
     
 	        </div>
     	</nav>
@@ -344,10 +347,10 @@
 					<tr><th>No.</th><th>Title</th><th>Content</th><th>View Lectures</th><th>Edit</th><th>Delete</th></tr>  
 					<c:forEach items="${a_clr_list}" var="u">  
 						<tr>
-							<td>${u.getId()}</td><td>${u.getTitle()}</td><td>${u.getContent()}</td>
-							<td><a href="lecbyclassroom/${u.getId()}">View</a>
-							<td><a href="editclassroom/${u.getId()}">Edit</a></td>  
-							<td><a href="deleteclassroom/${u.getId()}">Delete</a></td>
+							<td>${u.getClassID()}</td><td>${u.getClassTITLE()}</td><td>${u.getClassCONTENT()}</td>
+							<td><a href="lecbyclassroom/${u.getClassID()}">View</a>
+							<td><a href="editclassroom/${u.getClassID()}">Edit</a></td>  
+							<td><a href="deleteclassroom/${u.getClassID()}">Delete</a></td>
 						</tr>  
 					</c:forEach>  
 				</table>

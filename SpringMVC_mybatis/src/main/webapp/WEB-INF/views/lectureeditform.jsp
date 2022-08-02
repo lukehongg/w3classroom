@@ -374,7 +374,9 @@ input[type=submit]:hover {
     margin-top: 0;
   }
 }
-			
+		a:link, a:visited {
+    		color: mediumblue;
+    	}	
 		</style>
 	<script>
 		function returnBack(){
@@ -390,12 +392,12 @@ input[type=submit]:hover {
 		<nav class="navbar" style="height: 70px; padding:0; margin:0;">
 	        <div class="w3-bar w3-card-2 notranslate" style="width: 100%; height: inherit; padding-left:12px;padding-right:16px;overflow:visible; vertical-align: middle;">
             	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24" 
-            	href="viewclassroom" id="navbtn_tutorials" title="Tutorials" style="width:116px; background-color: #029959;color: white; ">Classroom</a> 
+            	href="viewclassroom" id="navbtn_tutorials" title="Tutorials" style="width:116px; color: black;">Classroom</a> 
             	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" 
-            	href="viewlecture" id="navbtn_references" title="References" style="width:132px; ">Lecture</a> 
+            	href="viewlecture" id="navbtn_references" title="References" style="width:132px; background-color: #029959;color: white; ">Lecture</a> 
 
-            	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" href="lectureform" id="navbtn_references" title="References" style="width:150px; float:right;">Create Lecture</a> 				
-				<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" href="classroomform" id="navbtn_tutorials" title="Tutorials" style="width:150px;float:right;">Create Classroom</a> 
+            	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" href="lectureform" id="navbtn_references" title="References" style="width:150px; float:right;color: black;">Create Lecture</a> 				
+				<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" href="classroomform" id="navbtn_tutorials" title="Tutorials" style="width:170px;float:right;color: black;">Create Classroom</a> 
 
 	       
 	        </div>
@@ -404,7 +406,8 @@ input[type=submit]:hover {
 	
         <div class="container">
 	    	<h1>Edit Lecture ${lid} </h1> 
-	       <form:form method="post" action="lectureeditsave">  
+	       <form:form method="post" action="lectureeditsave"> 
+	       <form:hidden  path="lectureID" /> 
 	      	<div class="row">
 			    <div class="col-25">
 			      <label for="fname">category :</label>

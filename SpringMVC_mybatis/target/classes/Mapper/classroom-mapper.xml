@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="classroomDB">
+<mapper namespace="com.javatpoint.service.ClassroomServiceITF">
 	<!-- READ -->
 		<!-- CLASSROOM  -->
 			<select id="selectClassroom" parameterType="int" resultType="ClassroomVO">
@@ -30,30 +30,30 @@
 			</select>
 			
 		<!--  USER -->
-			<select id="Login" parameterType="UserVO" resultType="Int">
+			<!-- <select id="Login" parameterType="UserVO" resultType="Int">
 		        SELECT COUNT(*)
 		          FROM USER
 		         WHERE id = #{id}
 		           AND password = #{password}
-		    </select>
+		    </select> -->
 			
 	
 	<!-- Insert -->
 	
 		<!--  CLASSROOM -->
 			<insert id="insertClassroom" parameterType="ClassroomVO">
-				insert into CLASSROOM values(#{title}, #{content})
+				insert into CLASSROOM(classTITLE, classCONTENT) values(#{classTITLE}, #{classCONTENT})
 			</insert>
 	
 	
 	
 		<!--  LECTURE -->
 			<insert id="insertLecture" parameterType="LectureVO">
-				insert into LECTURE values(#{category}, #{title}, #{content}, #{link})
+				insert into LECTURE(category, title, content, link) values(#{category}, #{title}, #{content}, #{link})
 			</insert>
 			
 			<insert id="insertLecInCurri" parameterType="HashMap">
-				insert into CURRICULUM values(#{cid}, #{lid})
+				insert into CURRICULUM(classroomID, lectureID) values(#{cid}, #{lid})
 			</insert>
 			
 		
@@ -67,14 +67,14 @@
 	<!-- Update -->
 		<!--  CLASSROOM -->
 			<update id="updateClassroom" parameterType="ClassroomVO">
-				update CLASSROOM set classTITLE=#{title}, classCONTENT=#{content} where classID=#{id}
+				update CLASSROOM set classTITLE=#{classTITLE}, classCONTENT=#{classCONTENT} where classID=#{classID}
 			</update>
 	
 	
 	
 		<!--  LECTURE -->
 			<update id="updateLecture" parameterType="LectureVO">
-				update LECTURE set category=#{category}, title=#{title}, content=#{content}, link=#{link} where lectureID=#{id}
+				update LECTURE set category=#{category}, title=#{title}, content=#{content}, link=#{link} where lectureID=#{lectureID}
 			</update>
 		
 		
@@ -87,11 +87,9 @@
 	<!-- Delete -->
 		<!--  CLASSROOM -->
 			<delete id="deleteClassroom" parameterType="int">
-				delete from CLASSROOM where classID=#{value}
+				delete from CLASSROOM where classroomID=#{value}
 			</delete>
-	
-	
-	
+
 		<!--  LECTURE -->
 			<delete id="deleteLecture" parameterType="int">
 				delete from LECTURE where lectureID=#{value}
@@ -102,10 +100,10 @@
 			</delete>
 			
 			<delete id="deleteCurriculum" parameterType="int">
-				delete from CURRICULUM where classID=#{value}
+				delete from CURRICULUM where classroomID=#{value}
 			</delete>
 			<insert id="deleteLecInCurri" parameterType="HashMap">
-				delete from CURRICULUM where classID = #{cid} AND lectureID = #{lid})
+				delete from CURRICULUM where classroomID = #{cid} AND lectureID = #{lid}
 			</insert>
 			
 			

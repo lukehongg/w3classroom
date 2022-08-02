@@ -6,7 +6,7 @@
 		<meta charset="UTF-8">
 		<title>W3Class</title>
 		<!-- <link rel="stylesheet" href="./w3s.css"> -->
-				<style>
+		<style>
 			#tableCSS {
 				  font-family: Arial, Helvetica, sans-serif;
 				  border-collapse: collapse;
@@ -311,7 +311,7 @@
 			a.hover_green:active {
 			    background-color: #029959!important;
 			    color: white!important;
-			}		
+			}			
 			
 			* {
   box-sizing: border-box;
@@ -375,9 +375,15 @@ input[type=submit]:hover {
     margin-top: 0;
   }
 }
-			
+			a:link, a:visited {
+    			color: mediumblue;
+    		}	
 		</style>
-
+		<script>
+			function returnBack(){
+				window.history.back();
+			}
+		</script>
 	</head>
 
 <body>
@@ -387,20 +393,22 @@ input[type=submit]:hover {
 	 	
 		<nav class="navbar" style="height: 70px; padding:0; margin:0;">
 	        <div class="w3-bar w3-card-2 notranslate" style="width: 100%; height: inherit; padding-left:12px;padding-right:16px;overflow:visible; vertical-align: middle;">
-            	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24" 
-            	href="viewclassroom" id="navbtn_tutorials" title="Tutorials" style="width:116px; background-color: #029959;color: white; ">Classroom</a> 
             	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" 
-            	href="viewlecture" id="navbtn_references" title="References" style="width:132px; ">Lecture</a> 
+            	href="viewclassroom" onclick="AllClassroom()" id="navbtn_tutorials" title="Tutorials" style="width:116px; color: black;">Classroom</a> 
+            	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" 
+            	href="viewlecture" onclick="AllLecture()" id="navbtn_references" title="References" style="width:132px; color: black;">Lecture</a> 
 
-            	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" href="lectureform" id="navbtn_references" title="References" style="width:150px; float:right;">Create Lecture</a> 				
-				<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" href="classroomform" id="navbtn_tutorials" title="Tutorials" style="width:150px;float:right;">Create Classroom</a> 
+            	<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" 
+            	href="lectureform" id="navbtn_references" title="References" style="width:150px; float:right;color: black;">Create Lecture</a> 				
+				<a class="w3-bar-item w3-button w3-hide-small barex bar-item-hover w3-padding-24 hover_green" 
+				href="classroomform" id="navbtn_tutorials" title="Tutorials" style="width:170px;float:right; background-color:#029959;color: white;">Create Classroom</a> 
 
-	       
+	            
 	        </div>
     	</nav>
 
 		
-			<h1>Add New Classroom</h1>
+			<h1 class="center">Add New Classroom</h1>
 	       <div class="container">
 	       <form:form method="post" action="saveClassroom">  
 			<div class="row">
@@ -408,7 +416,7 @@ input[type=submit]:hover {
 			      <label for="fname">Title :</label>
 			    </div>
 			    <div class="col-75">
-				  <form:input type="text" path="title"  />
+				  <form:input type="text" path="classTITLE"  />
 				</div>
 			</div>
 			<div class="row">
@@ -416,11 +424,12 @@ input[type=submit]:hover {
 			      <label for="fname">Content :</label>
 			    </div>
 			    <div class="col-75">
-				  <form:input type="text" path="content"  />
+				  <form:input type="text" path="classCONTENT"  />
 				</div>
 			</div>
 			<br>
 			 <div class="row">
+			    <button type="button" onclick="returnBack()">Cancel</button>
 			    <input type="submit" value="Save">
 			 </div>
 	      	</form:form>
